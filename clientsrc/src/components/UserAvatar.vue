@@ -1,6 +1,11 @@
 <template>
   <div class="d-flex align-items-center" :class="left ? 'flex-row-reverse': ''">
-    <img :src="user.picture" :height="height" :class="{rounded, 'rounded-circle': circle}" />
+    <img
+      :src="user.picture"
+      :height="height"
+      :width="height"
+      :class="{rounded, 'rounded-circle': circle}"
+    />
     <small class="mx-2" v-if="showName">{{user.name}}</small>
   </div>
 </template>
@@ -19,5 +24,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+img {
+  object-fit: cover;
+  object-position: top center;
+}
 </style>
