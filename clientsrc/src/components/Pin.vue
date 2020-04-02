@@ -5,14 +5,18 @@
       <favorite-icon class="favorite-icon" :pin="pin" />
     </div>
     <p>{{pin.description}}</p>
+    <!-- <button @click="drawGraph">draw</button> -->
+    <!-- <canvas ref="graph"></canvas> -->
     <hr />
     <div class="d-flex justify-content-between align-items-center">
       <user-avatar :user="pin.creator" height="40" rounded show-name />
-      <i
-        class="fa fa-trash text-muted mr-2"
+      <div
+        class="d-flex align-items-center"
         v-if="$auth.isAuthenticated && $auth.user.email == pin.creatorEmail"
-        @click="deletePin"
-      ></i>
+      >
+        <i class="fa fa-fw fa-trash text-muted mr-2 action muted" @click="deletePin"></i>
+        <i class="fa fa-fw fa-pencil text-muted mr-2 action muted" @click="editPin"></i>
+      </div>
     </div>
   </div>
 </template>
@@ -36,7 +40,17 @@ export default {
         return;
       }
       this.$store.dispatch("removePin");
-    }
+    },
+    editPin() {
+      this.$emit("edit", this.pin);
+    },
+    // drawGraph() {
+    //   let canvas = this.$refs.graph;
+    //   console.log("THE CANVAS ELEM", canvas);
+    //   var ctx = canvas.getContext("2d");
+    //   ctx.font = "30px Arial";
+    //   ctx.strokeText(this.pin.title, 10, 50);
+    // }
   }
 };
 </script>

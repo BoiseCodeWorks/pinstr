@@ -22,5 +22,6 @@ export function ConfigureResource(appInstance) {
   $resource.onRequest = _ => {
     appInstance.loading = true;
   };
+  // @ts-ignore
   $resource.defaultHeaders.Authorization = appInstance.$auth.bearer;
 }
